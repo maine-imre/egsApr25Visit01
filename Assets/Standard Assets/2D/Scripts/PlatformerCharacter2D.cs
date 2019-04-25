@@ -5,11 +5,12 @@ namespace UnityStandardAssets._2D
 {
     public class PlatformerCharacter2D : MonoBehaviour
     {
+        public static PlatformerCharacter2D ins;
         [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-        [SerializeField] private float m_JumpForce = 450f;                  // Amount of force added when the player jumps.
+        [SerializeField] private float m_JumpForce = 150f;                  // Amount of force added when the player jumps.
         [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
-        [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
-        [SerializeField] internal static LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+        [SerializeField] private bool m_AirControl = true;                 // Whether or not a player can steer while jumping;
+        [SerializeField] internal LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -22,6 +23,7 @@ namespace UnityStandardAssets._2D
 
         private void Awake()
         {
+            ins = this;
             // Setting up references.
             m_GroundCheck = transform.Find("GroundCheck");
             m_CeilingCheck = transform.Find("CeilingCheck");
@@ -90,12 +92,12 @@ namespace UnityStandardAssets._2D
                 }
             }
             // If the player should jump...
-            if (m_Grounded && jump && m_Anim.GetBool("Ground"))
+            if (jump && (m_Grounded || Platformer2DUserControl.ins.m_swordStuck) && m_Anim.GetBool("Ground"))
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce/2f));
             }
         }
 

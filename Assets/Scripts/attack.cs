@@ -20,7 +20,7 @@ private Quaternion initSwordRot = Quaternion.identity;
     void Update()
     {
         if(sword.transform.localPosition.y > initSwordPos.y)
-            sword.transform.localPosition -= Vector3.up * 0.02f;
+            sword.transform.localPosition -= Vector3.up * 0.04f;
 
         
         if (Input.GetKeyDown(KeyCode.Mouse0))

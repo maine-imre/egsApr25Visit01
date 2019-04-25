@@ -8,15 +8,21 @@ namespace UnityStandardAssets._2D
     public class Platformer2DUserControl : MonoBehaviour
     {
         public BoxCollider2D sword;
-        
+        public static Platformer2DUserControl ins;
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
 
-        private bool m_swordStuck
+
+        private void Start()
+        {
+            ins = this;
+        }
+
+        internal bool m_swordStuck
         {
             get
             {
-                return sword.IsTouchingLayers(PlatformerCharacter2D.m_WhatIsGround);
+                return sword.IsTouchingLayers(PlatformerCharacter2D.ins.m_WhatIsGround);
                 
             }
         }
@@ -29,10 +35,10 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
-            if (!m_Jump || m_swordStuck)
+            if (!m_Jump)
             {
                 // Read the jump input in Update so button presses aren't missed.
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                m_Jump = CrossPlatformInputManager.GetButton("Jump");
             }
         }
 
