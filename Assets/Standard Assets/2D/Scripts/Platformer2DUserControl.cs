@@ -7,9 +7,19 @@ namespace UnityStandardAssets._2D
     [RequireComponent(typeof (PlatformerCharacter2D))]
     public class Platformer2DUserControl : MonoBehaviour
     {
+        public BoxCollider2D sword;
+        
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
 
+        private bool m_swordStuck
+        {
+            get
+            {
+                return sword.IsTouchingLayers(PlatformerCharacter2D.m_WhatIsGround);
+                
+            }
+        }
 
         private void Awake()
         {
@@ -19,7 +29,7 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
-            if (!m_Jump)
+            if (!m_Jump || m_swordStuck)
             {
                 // Read the jump input in Update so button presses aren't missed.
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
