@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\imred\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\imred\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_egsApr25Visit01.1238944062.00" t="ExcludeRecursive" />
+    <e p="C:\Users\imred\Documents\Repositories\egsApr25Visit01" t="IncludeFlat">
+      <e p="egsApr25Visit01.sln" t="IncludeFlat" />
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
